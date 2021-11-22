@@ -1,37 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./card.styles.scss";
+import { Modal, Button, Form } from "react-bootstrap";
 
-const Card = ({id,name,username,password}) => (
-  <div className="card">
-      
-    <div className="card-title">
-    <span>{name}</span>
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} />;
+const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} />;
+
+const Card = ({ id, name, username, password }) => {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = (event) => {
+    event.preventDefault();
+    setPasswordShown(passwordShown ? false : true);
+  };
+  // const { register, handleSubmit } = useForm();
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
+
+  return (
+    <div className="card">
+      <div class="card-title">
+        {name.toUpperCase()}
+
+        <div className="underline-title"></div>
+      </div>
       <div className="card-body">
-        <form>
-          <div className="username-input">
-            <span>Username</span>
-            <input
-              type="text"
-              placeholder="Username"
-              id="username"
-              value={username}
-            />
-          </div>
-
-          <div className="password-input">
-            <span>Password</span>
-            <input
-              type="password"
-              placeholder="Password"
-              id="password"
-              value={password}
-
-            />
-          </div>
-        </form>
+        <Form.Group className="mb-3" controlId="cardUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Username"
+            value={username}
+            disabled
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="cardPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type={passwordShown ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            disabled
+          />
+          <i class="i-password" onClick={togglePasswordVisiblity}>
+            {passwordShown ? eye : eyeSlash}
+          </i>{" "}
+        </Form.Group>
+       
+        <button class="edit-btn" onClick={() => null}>
+          <i class="fa fa-pencil"></i>
+        </button>
       </div>
     </div>
-  </div>
-);
+  );
+};
 export default Card;

@@ -1,15 +1,44 @@
 .card {
-  
   display: grid;
   margin-left: auto;
   margin-right: auto;
-  width: 14rem;
+  border-radius: 8px;
+  width: 15rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 }
+.card-title {
+  margin: 0 auto;
+  
+}
+.underline-title {
+  background: #bdc3c7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #bdc3c7, #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #bdc3c7, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 2px;
+  margin: 0 auto;
+  
+}
 .card-body {
   padding: 2px 16px;
 }
+.edit-btn {
+  border: none; /* Remove borders */
+  color: black; /* White text */
+  background-color: transparent;
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+.i-password {
+  position: absolute;
+  bottom: 24%;
+  right: 10%;
+}
+.i-password:hover {
+  color: #8b8b8b;
+  cursor: pointer;
+}
+
