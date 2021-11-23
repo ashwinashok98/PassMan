@@ -2,7 +2,6 @@ import { Modal, Button, Form } from "react-bootstrap";
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 
-
 const FormModal = (props) => {
   const [users, setUsers] = useContext(UserContext);
   const [newUsername, setNewUsername] = useState("");
@@ -22,11 +21,10 @@ const FormModal = (props) => {
     setUsers([...users]);
 
     event.preventDefault();
-    setNewName('');
-    setNewUsername('');
-    setNewPassword('');
+    setNewName("");
+    setNewUsername("");
+    setNewPassword("");
     props.onHide();
-
   };
   return (
     <Modal {...props} size="md" aria-labelledby="formModal" centered>
@@ -46,9 +44,8 @@ const FormModal = (props) => {
               placeholder="Name/Title"
               onChange={(event) => setNewName(event.target.value)}
               value={newName}
-              maxLength = {20}
+              maxLength={20}
               required
-
             />
           </Form.Group>
 
@@ -71,11 +68,10 @@ const FormModal = (props) => {
               onChange={(event) => setNewPassword(event.target.value)}
               value={newPassword}
               required
-
             />
           </Form.Group>
 
-          <Button variant="dark" type="submit" >
+          <Button variant="dark" type="submit">
             Submit
           </Button>
         </Form>

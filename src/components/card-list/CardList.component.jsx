@@ -14,7 +14,8 @@ const CardList = (props) => {
       <div className="card-list">
         {userNumber > 0
           ? props.userList.map(({ id, ...otherUserProps }) => (
-              <Card key={id} {...otherUserProps} />
+              <Card key={id} {...otherUserProps} id={id} />
+              
             ))
           : null}
         <CreateCard application={props.applicationName} />
