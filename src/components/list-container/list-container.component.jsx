@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import "./list-container.styles.scss";
 import CardList from "../card-list/CardList.component";
 import { UserContext } from "../../context/userContext";
-import { ApplicationContext } from "../../context/applicationContext";
+import { CategoryContext } from "../../context/categoryContext";
 
 const ListContainer = (props) => {
   const [users] = useContext(UserContext);
-  const [application] = useContext(ApplicationContext);
+  const [category] = useContext(CategoryContext);
 
   const groupBy = (xs, key) => {
     return xs.reduce((rv, x) => {
@@ -14,22 +14,22 @@ const ListContainer = (props) => {
       return rv;
     }, {});
   };
-  const groubedByApplication = groupBy(users, "application");
+  const groubedByCategory = groupBy(users, "category");
 
-  return application.map((category, index) => {
-    if (!groubedByApplication[category]) {
+  return category.map((category, index) => {
+    if (!groubedByCategory[category]) {
       const usrList = {};
       return (
         <>
-          <CardList key={index} userList={usrList} applicationName={category} />
+          <CardList key={index} userList={usrList} categoryName={category} />
           
         </>
       );
     } else {
-      const usrList = groubedByApplication[category];
+      const usrList = groubedByCategory[category];
       return (
         <>
-          <CardList key={index} userList={usrList} applicationName={category} />
+          <CardList key={index} userList={usrList} categoryName={category} />
           
         </>
       );

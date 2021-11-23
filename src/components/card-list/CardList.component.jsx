@@ -8,7 +8,7 @@ const CardList = (props) => {
 
   return (
     <div className="card-list-name">
-      <div className="list-name">{props.applicationName.toUpperCase()}</div>
+      <div className="list-name">{props.categoryName.toUpperCase()}</div>
 
       <div className="underline"></div>
       <div className="card-list">
@@ -18,7 +18,7 @@ const CardList = (props) => {
               
             ))
           : null}
-        <CreateCard application={props.applicationName} />
+        <CreateCard category={props.categoryName} />
       </div>
     </div>
   );

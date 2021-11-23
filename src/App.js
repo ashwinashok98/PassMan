@@ -2,16 +2,16 @@ import "./App.css";
 import { React, Component, useContext } from "react";
 import ListContainer from "./components/list-container/list-container.component";
 import { UserProvider } from "./context/userContext";
-import { ApplicationProvider } from "./context/applicationContext";
+import { CategoryProvider } from "./context/categoryContext";
 const App = () => {
   
   return (
     <UserProvider>
-      <ApplicationProvider>
+      <CategoryProvider>
         <div className="App">
           <ListContainer />
         </div>
-      </ApplicationProvider>
+      </CategoryProvider>
     </UserProvider>
   );
 };

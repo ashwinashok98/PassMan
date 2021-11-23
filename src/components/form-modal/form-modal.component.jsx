@@ -12,7 +12,7 @@ const FormModal = (props) => {
     const newUser = {
       id: users.length + 1,
       name: newName,
-      application: props.application,
+      category: props.category,
       username: newUsername,
       password: newPassword,
     };
@@ -33,9 +33,9 @@ const FormModal = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formHandler}>
-          <Form.Group className="mb-3" controlId="formApplication">
-            <Form.Label>Application</Form.Label>
-            <Form.Control type="text" disabled value={props.application} />
+          <Form.Group className="mb-3" controlId="formcategory">
+            <Form.Label>Category</Form.Label>
+            <Form.Control type="text" disabled value={props.category} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formname">
             <Form.Label>Name</Form.Label>
