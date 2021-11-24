@@ -4,17 +4,19 @@ import CardList from "../card-list/CardList.component";
 import { UserContext } from "../../context/userContext";
 import { CategoryContext } from "../../context/categoryContext";
 
-const ListContainer = () => {
+const ListContainer = (props) => {
   const [users] = useContext(UserContext);
   const [category] = useContext(CategoryContext);
-  
+  const filteredUsers = users.filter((user) =>
+      user.name.toLowerCase().includes(props.searchValue.toLowerCase())
+    );
   const groupBy = (xs, key) => {
     return xs.reduce((rv, x) => {
       (rv[x[key]] = rv[x[key]] || []).push(x);
       return rv;
     }, {});
   };
-  const groubedByCategory = groupBy(users, "category");
+  const groubedByCategory = groupBy(filteredUsers, "category");
 
   return category.map((category, index) => {
     if (!groubedByCategory[category]) {
