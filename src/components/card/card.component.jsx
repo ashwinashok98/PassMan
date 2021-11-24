@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import "./card.styles.scss";
-import { Modal, Button, Form } from "react-bootstrap";
-import DialogModal from "../dialog-modal/dialog-modal.component";
+import {  Form } from "react-bootstrap";
+import {DialogModal} from "../dialog-modal/dialog-modal.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
@@ -37,7 +37,7 @@ const Card = ({ id, name, username, password }) => {
     setEdit(!edit);
   };
   const confirmChange = () => {
-    setShowDialog(true);
+    handleShow();
     
   };
   const applyChange = () => {

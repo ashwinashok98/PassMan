@@ -1,16 +1,16 @@
 import React from "react";
-import { Modal,Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import "./dialog-modal.styles.scss";
 
-const DialogModal = (props) => {
-    const apply=()=>{
-        props.applyChange()
-        props.onHide()
-    };
-    const cancel=()=>{
-        props.cancelChange()
-        props.onHide()
-    };
+export const DialogModal = (props) => {
+  const apply = () => {
+    props.applyChange();
+    props.onHide();
+  };
+  const cancel = () => {
+    props.cancelChange();
+    props.onHide();
+  };
   return (
     <Modal
       {...props}
@@ -33,4 +33,3 @@ const DialogModal = (props) => {
     </Modal>
   );
 };
-export default DialogModal;
