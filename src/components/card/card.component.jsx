@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import "./card.styles.scss";
-import {  Form } from "react-bootstrap";
-import {DialogModal} from "../dialog-modal/dialog-modal.component";
+import { Form } from "react-bootstrap";
+import { DialogModal } from "../dialog-modal/dialog-modal.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
@@ -10,6 +10,7 @@ import {
   faTimes,
   faCheck,
   faEdit,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 const eye = <FontAwesomeIcon icon={faEye} />;
@@ -20,7 +21,7 @@ const edit_btn = <FontAwesomeIcon icon={faEdit} />;
 const Card = ({ id, name, username, password }) => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [edit, setEdit] = useState(false);
-
+  const [deleteTrigger,setDeleteTrigger]=useState(false);
   const [showDialog, setShowDialog] = useState(false); //Dialog box
   const handleClose = () => setShowDialog(false);
   const handleShow = () => setShowDialog(true);
@@ -38,24 +39,35 @@ const Card = ({ id, name, username, password }) => {
   };
   const confirmChange = () => {
     handleShow();
-    
   };
   const applyChange = () => {
-    users.map((user) => {
+    if(deleteTrigger){
+      deleteUser();
+      setDeleteTrigger(!deleteTrigger);
+    }else{
+      users.map((user) => {
       if (user.id === id) {
         user.username = newUsername;
         user.password = newPassword;
       }
     });
     setUsers([...users]);
+    }
+
+    
   };
   const cancelChange = () => {
     setNewUsername(username);
     setNewPassword(password);
   };
+  const deleteUser=()=>{
+    const newListUsers= users.filter(user=>user.id!=id)
+    setUsers(newListUsers)
+  };
 
   return (
     <div className="card">
+      <FontAwesomeIcon icon={faTrash} className="delete_btn" onClick={()=>{setDeleteTrigger(true); confirmChange()}}/>
       <div class="card-title">
         {name.toUpperCase()}
 

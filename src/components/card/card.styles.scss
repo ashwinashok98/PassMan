@@ -1,5 +1,5 @@
 .card {
-  display: grid;
+  
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
@@ -34,7 +34,7 @@
 }
 .i-password {
   position: absolute;
-  bottom: 24%;
+  bottom: 22%;
   right: 10%;
 }
 .i-password:hover {
@@ -60,6 +60,22 @@
     filter: drop-shadow(2px 2px 2px #4848496b);
     
   }
+}
+.delete_btn{
+  cursor: pointer;
+  background-color: transparent;
+  background: transparent;
+  font-size: medium;
+  margin: 0.5rem;
+  margin-left: 90%;
+  display: inline-block;
+    text-align: right;
+  
+  &:hover{
+    filter: drop-shadow(2px 2px 2px #4848496b);
+    
+  }
+
 }
 
 
