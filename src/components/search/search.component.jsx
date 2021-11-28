@@ -16,7 +16,7 @@ const Search = (props) => {
     <Navbar className="search-nav " sticky="top" bg="light" expand="lg">
       <PageIcon />
       <span>&nbsp;&nbsp;</span>
-      <h2>PassMan</h2>
+      <h2 class="title">PassMan</h2>
       <Nav className="justify-content-end" style={{ width: "100%" }}>
         <Form className="search navbar-left">
           <FormControl
