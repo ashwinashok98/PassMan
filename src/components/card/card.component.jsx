@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import axios from "axios";
 import { UserContext } from "../../context/userContext";
 import "./card.styles.scss";
 import { Form } from "react-bootstrap";
@@ -12,6 +13,7 @@ import {
   faEdit,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+const baseURL = "http://localhost:3000";
 
 const eye = <FontAwesomeIcon icon={faEye} />;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} />;
@@ -21,7 +23,7 @@ const edit_btn = <FontAwesomeIcon icon={faEdit} />;
 const Card = ({ id, name, username, password }) => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [deleteTrigger,setDeleteTrigger]=useState(false);
+  const [deleteTrigger, setDeleteTrigger] = useState(false);
   const [showDialog, setShowDialog] = useState(false); //Dialog box
   const handleClose = () => setShowDialog(false);
   const handleShow = () => setShowDialog(true);
@@ -40,41 +42,63 @@ const Card = ({ id, name, username, password }) => {
   const confirmChange = () => {
     handleShow();
   };
-  const applyChange = () => {
-    if(deleteTrigger){
+  const applyChange =  () => {
+    if (deleteTrigger) {
       deleteUser();
       setDeleteTrigger(!deleteTrigger);
-    }else{
+    } else {
       users.map((user) => {
-      if (user.id === id) {
-        user.username = newUsername;
-        user.password = newPassword;
-      }
-    });
-    setUsers([...users]);
+        if (user._id === id) {
+          user.username = newUsername;
+          user.password = newPassword;
+           axios
+            .put(`${baseURL}/users/update/${id}`, {
+              username: newUsername,
+              password: newPassword,
+            })
+            .then((res) => {
+              setUsers([...users]);
+              console.log(res.data)
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+      
     }
-
-    
   };
   const cancelChange = () => {
     setNewUsername(username);
     setNewPassword(password);
   };
-  const deleteUser=()=>{
-    const newListUsers= users.filter(user=>user.id!=id)
-    setUsers(newListUsers)
+  const deleteUser = () => {
+    const newListUsers = users.filter((user) => user._id != id);
+    axios.delete(`${baseURL}/users/delete/${id}`).then(res=>{
+      console.log(res);  
+      console.log(res.data);
+      setUsers(newListUsers);
+    })
+    
   };
 
   return (
     <div className="card">
-      <FontAwesomeIcon icon={faTrash} className="delete_btn" onClick={()=>{setDeleteTrigger(true); confirmChange()}}/>
+      <FontAwesomeIcon
+        icon={faTrash}
+        className="delete_btn"
+        onClick={() => {
+          setDeleteTrigger(true);
+          confirmChange();
+        }}
+      />
       <div class="card-title">
         {name.toUpperCase()}
 
         <div className="underline-title"></div>
       </div>
       <div className="card-body">
-        <Form.Group className="mb-3" controlId="cardUsername">
+        <Form.Group className="mb-3" controlId={id}>
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
@@ -86,7 +110,7 @@ const Card = ({ id, name, username, password }) => {
             disabled={!edit}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="cardPassword">
+        <Form.Group className="mb-3" controlId={id}>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type={passwordShown ? "text" : "password"}

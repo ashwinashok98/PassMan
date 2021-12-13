@@ -1,6 +1,9 @@
 import { Modal, Button, Form } from "react-bootstrap";
 import React, { useContext, useState } from "react";
+import axios from "axios";
+
 import { UserContext } from "../../context/userContext";
+const baseURL = "http://localhost:3000";
 
 const FormModal = (props) => {
   const [users, setUsers] = useContext(UserContext);
@@ -10,15 +13,24 @@ const FormModal = (props) => {
 
   const formHandler = (event) => {
     const newUser = {
-      id: users.length + 1,
       name: newName,
       category: props.category,
       username: newUsername,
       password: newPassword,
     };
-    users.push(newUser);
+    axios
+      .post(`${baseURL}/users/create`, newUser)
+      .then((res) => {
+        users.push(newUser);
 
-    setUsers([...users]);
+        setUsers([...users]);
+        console.log(res.data);
+        
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     event.preventDefault();
     setNewName("");

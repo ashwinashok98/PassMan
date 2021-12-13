@@ -13,8 +13,8 @@ const CardList = (props) => {
       <div className="underline"></div>
       <div className="card-list">
         {userNumber > 0
-          ? props.userList.map(({ id, ...otherUserProps }) => (
-              <Card key={id} {...otherUserProps} id={id} />
+          ? props.userList.map(({ _id, ...otherUserProps }) => (
+              <Card key={_id} {...otherUserProps} id={_id} />
               
             ))
           : null}

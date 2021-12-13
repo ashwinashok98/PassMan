@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+
 import "./list-container.styles.scss";
 import CardList from "../card-list/CardList.component";
 import { UserContext } from "../../context/userContext";
 import { CategoryContext } from "../../context/categoryContext";
 
 const ListContainer = (props) => {
-  const [users] = useContext(UserContext);
+  const [users] = useContext(UserContext);  
   const [category] = useContext(CategoryContext);
   const filteredUsers = users.filter((user) =>
       user.name.toLowerCase().includes(props.searchValue.toLowerCase())
