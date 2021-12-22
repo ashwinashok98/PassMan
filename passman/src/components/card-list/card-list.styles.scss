@@ -19,5 +19,21 @@
    font-weight: bold; 
 
  }
+ .delete_list_btn{
+  cursor: pointer;
+  background-color: transparent;
+  background: transparent;
+  font-size: small;
+  
+  margin-left: 2%;
+  display: inline-block;
+    text-align: right;
+  
+  &:hover{
+    filter: drop-shadow(2px 2px 2px #4848496b);
+    
+  }
+
+}
  
   

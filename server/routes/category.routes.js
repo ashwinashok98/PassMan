@@ -3,7 +3,7 @@ let mongoose = require("mongoose"),
   router = express.Router();
 let category = require("../models/category-schema");
 
-router.route("/create").post((req, res) => {
+router.route("/create").post((req, res, next) => {
   category.create(req.body, (error, data) => {
     if (error) {
       return next(error);
@@ -15,7 +15,7 @@ router.route("/create").post((req, res) => {
   });
 });
 
-router.route("/").get((req, res) => {
+router.route("/").get((req, res,next) => {
   category.find((error, data) => {
     if (error) {
       return next(error);
@@ -44,17 +44,17 @@ router.route("/").get((req, res) => {
 //     );
 //   });
   
-//   router.route("/delete/:id").delete((req, res, next) => {
-//     user.findOneAndRemove({ _id: req.params.id }, (error, data) => {
-//       if (error) {
-//         return next(error);
-//       } else {
-//         res.status(200).json({
-//           msg: data,
-//         });
-//         console.log("category Deleted successfully !");
-//       }
-//     });
-//   });
+  router.route("/delete/:name").delete((req, res, next) => {
+    category.findOneAndRemove({ name: req.params.name }, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data,
+        });
+        console.log("category Deleted successfully !");
+      }
+    });
+  });
 
 module.exports = router;

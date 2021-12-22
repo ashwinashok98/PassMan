@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 let categorySchema = new Schema({
     
     name:  {
-        type: String
+        type: String, unique : true, required : true
     }
 }, {
         collection: 'category'

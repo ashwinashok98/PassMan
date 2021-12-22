@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use('/users', userRoute)
-app.use('/category',categoryRoute)
+app.use('/category', categoryRoute)
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {

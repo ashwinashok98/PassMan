@@ -13,13 +13,13 @@ const App = () => {
   const baseURL = "http://localhost:3000";
   const [users, setUsers] = useContext(UserContext);
   const [category, setCategory] = useContext(CategoryContext);
-  const [userLength, setUserLength] = useState(0);
+  
 
 
   const fetchData = (async () => {
     const userRes = await axios.get(`${baseURL}/users`);
     setUsers(userRes.data);
-    setUserLength(userRes.data.length)
+    
     const categoryRes = await axios.get(`${baseURL}/category`);
     let categories = categoryRes.data.map((cat) => {
       return cat.name;
